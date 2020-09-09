@@ -1,0 +1,65 @@
+<form [formGroup]="form">
+  <div class="row">
+    <div class="col-6">
+      <h1>Hello, Sprinta!</h1>
+      <p>Här kan du lägga order på flyttstäd. Priset sker per kvadratmeter!</p>
+
+
+      <p>Välj stad:</p>
+      <select class="form-control" formControlName="cityId" (change)="onChange($event)">
+        <option *ngFor="let city of cities" [value]="city.id">{{city.name}} ({{city.squareMeterPrice}}kr)/m2</option>
+      </select>
+      <br />
+      <p>Hur många kvadratmeter ska städas:</p>
+      <input class="form-control" type="number" formControlName="squareMeter" min="1" />
+      <br />
+      <p>Välj tillval:</p>
+      <ng-multiselect-dropdown formControlName="options" [settings]="dropdownSettings" [data]="options">
+      </ng-multiselect-dropdown>
+      <br />
+      <div>
+        <button class="button" type="submit" (click)="onSubmit()">Lägg order!</button>
+      </div>
+    </div>
+
+    <div class="col-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Offert</h5>
+          <label>Stad:</label>
+          <input type="text" class="form-control" value="{{offer.city}}">
+          <label>Antal kvadratmeter:</label>
+          <input type="text" class="form-control" value="{{offer.squareMeter}}">
+          <label>Tillval:</label>
+          <select multiple class="form-control">
+            <option *ngFor="let option of offer.options">{{option.name}} {{option.price}}kr</option>
+          </select>
+          <label>Pris:</label>
+          <input type="text" class="form-control" value="{{offer.price}}kr">
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<style>
+  .button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+  }
+
+    .button:hover {
+      box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    }
+</style>
